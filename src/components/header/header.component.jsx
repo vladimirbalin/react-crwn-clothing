@@ -2,12 +2,13 @@ import React from 'react';
 import './header.styles.scss';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Crown } from '../../assets/crown.svg';
+import { auth } from "../../firebase/firebase.utils";
 
-const Header = () => {
+const Header = ({currentUser}) => {
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
-        <Crown />
+        <Crown/>
       </Link>
       <div className='options'>
         <Link className='option' to='/shop'>
@@ -16,12 +17,19 @@ const Header = () => {
         <Link className='option' to='/contact'>
           CONTACT
         </Link>
-        <Link className='option' to='/sign-in'>
-          SIGN IN
-        </Link>
+        {
+          currentUser ?
+            <div className='option' onClick={() => auth.signOut()}>
+              SIGN OUT
+            </div>
+            :
+            <Link className='option' to='/sign-in'>
+              SIGN IN
+            </Link>
+        }
       </div>
     </div>
   );
-}
+};
 
 export default Header;
