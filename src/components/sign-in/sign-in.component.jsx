@@ -10,8 +10,7 @@ class SignIn extends Component {
     this.state = {
     email: "",
     password: "",
-  }
-  console.log(this)
+  };
 }
   handleSubmit = e => {
     e.preventDefault();
