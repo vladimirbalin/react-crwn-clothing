@@ -48,8 +48,12 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
 
+// const func = async () => {
+//   const usersRef = firestore.collection(`/users`)
+//     .where('displayName', '==', '123');
+//   const result = await usersRef.get();
+//   // const data = await result.data();
+//    //console.log(result);
 
-// const coll = firestore.collection('users').doc('heoI8LoaPmfcMEh84yeZ');
-// const coll2 = firestore.doc('/users/heoI8LoaPmfcMEh84yeZ/cartItems/PVvZeNOzIUQRfUBXXYJf');
-// console.log(coll2);
-
+// };
+// func()
