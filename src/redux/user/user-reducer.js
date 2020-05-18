@@ -3,7 +3,7 @@ const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 const INITIAL_STATE = {
   currentUser: null
-}
+};
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch(action.type){
@@ -16,7 +16,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-}
+};
 
 export const setCurrentUser = (user) => ({type: SET_CURRENT_USER, payload: user})
 
