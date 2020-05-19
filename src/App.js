@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-reducer";
+import Checkout from "./pages/checkout/checkout.component";
 
 
 class App extends React.Component {
@@ -45,6 +46,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route path="/sign-in" render={()=> this.props.currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>} />
         </Switch>
       </div>
