@@ -1,14 +1,14 @@
 import React from 'react';
 import './checkout-item.styles.scss';
 import { connect } from "react-redux";
-import { decreaseQuantity, addItem, removeCartItem } from "../../redux/cart/cart-reducer";
+import { removeItem, addItem, clearItemFromCart } from "../../redux/cart/cart-reducer";
 
-const CheckOutItem = ({ cartItem, decreaseQuantity, addItem, removeCartItem }) => {
+const CheckOutItem = ({ cartItem, removeItem, addItem, clearItemFromCart }) => {
   const { name, quantity, price, imageUrl } = cartItem;
 
-  const decreaseQuantityHandler = () => decreaseQuantity(cartItem);
+  const decreaseQuantityHandler = () => removeItem(cartItem);
   const increaseQuantityHandler = () => addItem(cartItem);
-  const removeItemFromCart = () => removeCartItem(cartItem);
+  const removeItemFromCart = () => clearItemFromCart(cartItem);
 
   return (
     <div className='checkout-item'>
@@ -28,4 +28,4 @@ const CheckOutItem = ({ cartItem, decreaseQuantity, addItem, removeCartItem }) =
 };
 
 
-export default connect(null, {decreaseQuantity, addItem, removeCartItem})(CheckOutItem);
+export default connect(null, {removeItem, addItem, clearItemFromCart})(CheckOutItem);

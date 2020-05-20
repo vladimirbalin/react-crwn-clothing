@@ -10,7 +10,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   return [...cartItems, {...cartItemToAdd, quantity: 1}];
 };
 
-export const decreaseQuantityOfItem = (cartItems, cartItemToAdd) => {
+export const removeItemFromCart = (cartItems, cartItemToAdd) => {
   const existingItem = cartItems.find(item => item.id === cartItemToAdd.id);
   const indexOf = cartItems.indexOf(existingItem);
 
@@ -25,6 +25,3 @@ export const decreaseQuantityOfItem = (cartItems, cartItemToAdd) => {
       ...cartItems.slice(indexOf + 1)];
 
 };
-
-export const removeItemFromCart = (cartItems, cartItemToRemove) =>
-  cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
