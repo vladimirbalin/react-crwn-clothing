@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 import React from 'react';
 
 const MenuItem = ({ title, imageUrl, size='', linkUrl, history, match }) => {
+  const clickHandler = () => history.push(`${match.url}${linkUrl}`);
   return (
     <div className={`menu-item ${size}`}
-        onClick={() => history.push(`${match.url}${linkUrl}`)}>
+        onClick={clickHandler}>
       <div className='background-image' style={{
         backgroundImage: `url(${imageUrl})`
        }}/>
@@ -15,6 +16,6 @@ const MenuItem = ({ title, imageUrl, size='', linkUrl, history, match }) => {
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(MenuItem);
