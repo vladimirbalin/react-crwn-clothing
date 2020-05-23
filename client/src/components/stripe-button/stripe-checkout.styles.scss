@@ -1,0 +1,46 @@
+.stripe-form {
+  width: 20vw;
+  margin: 10px auto;
+  text-align: center;
+
+  .group {
+    margin: 0;
+
+    .form-input {
+      font-size: 16px;
+    }
+  }
+
+  .card-element-container {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #a6abb0;
+    margin: 10px;
+
+    & .StripeElement {
+      width: 100%;
+      padding: 15px;
+    }
+
+  }
+
+  .custom-button {
+    display: block;
+    margin: 0 auto;
+
+    &:disabled {
+      opacity: .1;
+
+      &:hover {
+        background-color: black;
+        color: white;
+        cursor: auto;
+        border: none;
+      }
+    }
+  }
+}
+
+
+

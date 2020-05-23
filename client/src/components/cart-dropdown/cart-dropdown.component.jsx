@@ -21,8 +21,9 @@ const CartDropDown = ({ cartItems, history, toggleDropdown }) => {
           :
           <span className='empty-message'>Your cart is empty</span>
         }
-        <CustomButton onClick={goToCheckoutPage}>GO TO CHECKOUT</CustomButton>
+
       </div>
+      <CustomButton onClick={goToCheckoutPage}>GO TO CHECKOUT</CustomButton>
     </div>
   );
 };
