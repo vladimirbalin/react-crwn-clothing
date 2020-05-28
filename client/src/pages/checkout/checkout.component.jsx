@@ -2,13 +2,11 @@ import React from 'react';
 import './checkout.styles.scss';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from "reselect";
+import { compose } from "redux";
 import { selectCartItems, selectTotalCartItemsPrice } from "../../redux/cart/cart-selectors";
 import CheckOutItem from "../../components/checkout-item/checkout-item.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
-import { compose } from "redux";
-import { Route } from "react-router-dom";
 import Payment from "../../components/payment/payment.component";
-import Directory from "../../components/directory/directory.component";
 
 
 const Checkout = ({ cartItems, totalPrice, history, match, location }) => {
@@ -37,7 +35,8 @@ const Checkout = ({ cartItems, totalPrice, history, match, location }) => {
         TOTAL: ${totalPrice}
       </div>
 
-      <CustomButton onClick={() => history.push(`${match.path}/payment`)}>to the payment</CustomButton>
+      <CustomButton onClick={() => history.push(`${match.url}/payment`)}>to the payment</CustomButton>
+      {match.params.payment && <Payment />}
     </div>
   );
 };

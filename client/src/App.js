@@ -9,18 +9,16 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-reducer";
 import Checkout from "./pages/checkout/checkout.component";
-import Directory from "./components/directory/directory.component";
-import Payment from "./components/payment/payment.component";
 
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    
+
     //subscribe on logged in firebase user
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      
+
       if (user) {
         const userRef = await createUserProfileDocument(user);
 
@@ -45,13 +43,12 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        {/*<Switch>*/}
+        <Switch>
           <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/checkout/payment" component={Payment} />
-        <Route path="/sign-in" render={()=> this.props.currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>} />
-        {/*</Switch>*/}
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/checkout/:payment?" component={Checkout} />
+          <Route path="/sign-in" render={()=> this.props.currentUser ? <Redirect to='/'/> : <SignInAndSignUpPage/>} />
+        </Switch>
       </div>
     );
   }

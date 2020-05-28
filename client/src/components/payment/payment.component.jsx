@@ -1,6 +1,7 @@
 import React from 'react';
 import './payment.styles.scss';
 import StripeCheckout from "../stripe-button/stripe-checkout.component";
+import { withRouter } from "react-router-dom";
 
 const Payment = ({totalPrice, match, history}) => {
   const onSuccessfulCheckout = () => {
@@ -25,4 +26,4 @@ const Payment = ({totalPrice, match, history}) => {
   )
 };
 
-export default Payment;
+export default withRouter(Payment);

@@ -47,13 +47,3 @@ provider.setCustomParameters({prompt: 'select_account'});
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
-
-// const func = async () => {
-//   const usersRef = firestore.collection(`/users`)
-//     .where('displayName', '==', '123');
-//   const result = await usersRef.get();
-//   // const data = await result.data();
-//    //console.log(result);
-
-// };
-// func()
