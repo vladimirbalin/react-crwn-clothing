@@ -7,7 +7,7 @@ import { CardElement } from "@stripe/react-stripe-js";
 function BillingDetails(props) {
   const {
     name, email, address, city, zip,
-    isProcessing, stripe, price,
+    isProcessing, stripe, totalPrice,
     handleChange, handleCardDetailsChange
   } = props;
   return (
@@ -61,7 +61,7 @@ function BillingDetails(props) {
         <CardElement options={{hidePostalCode: true}}
                      onChange={handleCardDetailsChange}/>
       </div>
-      <CustomButton disabled={isProcessing || !stripe}>Pay ${price}</CustomButton>
+      <CustomButton type='submit' disabled={isProcessing || !stripe}>Pay ${totalPrice}</CustomButton>
     </>
   );
 }

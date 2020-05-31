@@ -3,7 +3,7 @@ import './payment.styles.scss';
 import StripeCheckout from "../stripe-button/stripe-checkout.component";
 import { withRouter } from "react-router-dom";
 
-const Payment = ({totalPrice, match, history}) => {
+const Payment = ({ history }) => {
   const onSuccessfulCheckout = () => {
     alert('SUCCESS');
   };
@@ -11,7 +11,7 @@ const Payment = ({totalPrice, match, history}) => {
     <div className='popup-payment'>
       <div className="popup-dialog">
         <div className="popup-content">
-          <StripeCheckout price={totalPrice} onSuccessfulCheckout={onSuccessfulCheckout}/>
+          <StripeCheckout onSuccessfulCheckout={onSuccessfulCheckout}/>
 
           <span className='test-fakecard'>
             <p className='title'>Use following fake card for testing payments: </p>

@@ -3,8 +3,12 @@ import { useElements, useStripe } from "@stripe/react-stripe-js";
 import './stripe-checkout.styles.scss';
 import BillingDetails from "./billing-details.component";
 import axios from "axios";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {selectTotalCartItemsPrice} from "../../redux/cart/cart-selectors";
+import {withRouter} from "react-router-dom";
 
-const StripeCheckout = ({price, onSuccessfulCheckout}) => {
+const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
 
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
@@ -61,10 +65,13 @@ const StripeCheckout = ({price, onSuccessfulCheckout}) => {
     const cardElement = elements.getElement("card");
 
     try {
-      const {data: clientSecret} = await axios.post("payment", {
-        amount: price * 100,
-
-      });
+      const {data: clientSecret} = await axios({
+        url: '/payment',
+        method: 'post',
+        data: {
+          amount: totalPrice * 100,
+        }
+      })
 
       const paymentMethodReq = await stripe.createPaymentMethod({
         type: "card",
@@ -79,8 +86,9 @@ const StripeCheckout = ({price, onSuccessfulCheckout}) => {
       }
 
       const {error} = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethodReq.paymentMethod.id
-      });
+          payment_method: paymentMethodReq.paymentMethod.id
+        }
+      );
 
       if (error) {
         setCheckoutError(error.message);
@@ -105,7 +113,7 @@ const StripeCheckout = ({price, onSuccessfulCheckout}) => {
     <form className='stripe-form' onSubmit={handleFormSubmit}>
       <BillingDetails isProcessing={isProcessing}
                       stripe={stripe}
-                      price={price}
+                      totalPrice={totalPrice}
                       name={name}
                       address={address}
                       email={email}
@@ -118,4 +126,8 @@ const StripeCheckout = ({price, onSuccessfulCheckout}) => {
 
 };
 
-export default StripeCheckout;
+const mapStateToProps = createStructuredSelector({
+  totalPrice: selectTotalCartItemsPrice
+})
+
+export default withRouter(connect(mapStateToProps)(StripeCheckout));

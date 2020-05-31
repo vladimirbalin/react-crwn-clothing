@@ -5,8 +5,8 @@ import CustomButton from "../custom-button/custom-button.component";
 import { signInWithGoogle, auth } from "../../firebase/firebase.utils";
 
 class SignIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",

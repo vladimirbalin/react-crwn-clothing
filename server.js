@@ -38,6 +38,7 @@ app.post('/payment', async (req, res) => {
         currency: "usd"
       });
 
+
       res.status(200).send(paymentIntent.client_secret);
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: err.message });
