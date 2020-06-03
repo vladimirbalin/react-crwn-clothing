@@ -1,21 +1,38 @@
 import React from "react";
-import './collection.styles.scss';
 import { selectExactCollection } from "../../redux/shop/shop-selectors";
 import { connect } from "react-redux";
 import CollectionItem from "../../components/collection-item/collection-item.component";
+import styled from "styled-components";
+
+const CollectionPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Title = styled.h2`
+  font-size: 38px;
+  margin: 0 auto 30px;
+`;
+const Items = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+const CollectionItemContainer = styled(CollectionItem)`
+  margin-bottom: 30px;
+  margin-right: 10px;
+`;
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
   return (
-    <div className='collection-page'>
-      <h2 className="title">{ title }</h2>
-      <div className="items">
+    <CollectionPageContainer>
+      <Title>{ title }</Title>
+      <Items>
         {
-          items.map(item => <CollectionItem key={item.id} item={item}/>)
+          items.map(item => <CollectionItemContainer key={item.id} item={item}/>)
         }
-      </div>
+      </Items>
 
-    </div>
+    </CollectionPageContainer>
   )
 };
 

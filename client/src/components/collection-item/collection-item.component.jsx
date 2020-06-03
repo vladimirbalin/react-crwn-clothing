@@ -49,15 +49,16 @@ const Button = styled(CustomButton)`
     }
 `;
 
-const CollectionItem = ({ item, addItem }) => {
+const CollectionItem = ({ item, addItem, className }) => {
   const { imageUrl, name, price } = item;
   const handleClick = () => addItem(item);
+
   return (
-    <CollectionItemContainer>
+    <CollectionItemContainer className={className}>
       <ImageContainer imageUrl={imageUrl}  />
       <CollectionFooter>
-        <Name className="name">{name}</Name>
-        <Price className="price">${price}</Price>
+        <Name>{name}</Name>
+        <Price>${price}</Price>
       </CollectionFooter>
       <Button onClick={handleClick} inverted>add to cart</Button>
     </CollectionItemContainer>

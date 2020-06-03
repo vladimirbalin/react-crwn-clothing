@@ -1,7 +1,43 @@
 import React from 'react';
-import './checkout-item.styles.scss';
 import { connect } from "react-redux";
 import { removeItem, addItem, clearItemFromCart } from "../../redux/cart/cart-reducer";
+import styled from "styled-components";
+
+const CheckOutItemContainer = styled.div`
+  width: 100%;
+  display: flex;
+  min-height: 100px;
+  border-bottom: 1px solid darkgrey;
+  padding: 15px 0;
+  font-size: 20px;
+  align-items: center;
+`;
+const ImageContainer = styled.div`
+  width: 23%;
+  padding-right: 15px;
+`;
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+const Name = styled.span`
+  width: 23%;
+`;
+const Quantity = styled.span`
+  width: 23%;
+  display: flex;
+`;
+const Price = styled.span`
+  width: 23%;
+`;
+const ChangeCount = styled.div`
+  cursor: pointer;
+  padding: 0 10px;
+`;
+const RemoveButton = styled.div`
+  padding-left: 12px;
+  cursor: pointer;
+`;
 
 const CheckOutItem = ({ cartItem, removeItem, addItem, clearItemFromCart }) => {
   const { name, quantity, price, imageUrl } = cartItem;
@@ -11,19 +47,19 @@ const CheckOutItem = ({ cartItem, removeItem, addItem, clearItemFromCart }) => {
   const removeItemFromCart = () => clearItemFromCart(cartItem);
 
   return (
-    <div className='checkout-item'>
-      <div className="image-container">
-        <img src={imageUrl} alt={name}/>
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="increase-decrease" onClick={decreaseQuantityHandler}>&#10094;</div>
+    <CheckOutItemContainer>
+      <ImageContainer>
+        <Image src={imageUrl} alt={name}/>
+      </ImageContainer>
+      <Name>{name}</Name>
+      <Quantity>
+        <ChangeCount onClick={decreaseQuantityHandler}>&#10094;</ChangeCount>
         {quantity}
-        <div className="increase-decrease" onClick={increaseQuantityHandler}>&#10095;</div>
-      </span>
-      <span className="price">${price}</span>
-      <div className="remove-button" onClick={removeItemFromCart}>&#10005;</div>
-    </div>
+        <ChangeCount onClick={increaseQuantityHandler}>&#10095;</ChangeCount>
+      </Quantity>
+      <Price>${price}</Price>
+      <RemoveButton onClick={removeItemFromCart}>&#10005;</RemoveButton>
+    </CheckOutItemContainer>
   )
 };
 

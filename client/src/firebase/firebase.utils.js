@@ -16,12 +16,10 @@ const config = {
 export const createUserProfileDocument = async (currentUser, additionalData) => {
   if(!currentUser) return;
 
-  const userRef = firestore.collection(`users`)
-    .doc(currentUser.uid)
+  const userRef = firestore.collection(`users`).doc(currentUser.uid)
+
   const snapShot = await userRef.get();
 
-  console.log('userRef: ', userRef)
-  console.log('snapshotdata: ', snapShot.data())
   try{
     if(!snapShot.exists){
       const { displayName, email } = currentUser;
@@ -39,6 +37,24 @@ export const createUserProfileDocument = async (currentUser, additionalData) => 
 
   return userRef;
 };
+
+export const createCollection = async (collectionName, collectionToAdd) => {
+  const collRef = firestore.collection(collectionName);
+  const collSnap = await collRef.get();
+  const batch = firestore.batch();
+
+  if(collSnap.empty){
+    Object.keys(collectionToAdd).forEach(key =>{
+      const docRef = collRef.doc();
+      batch.set(docRef, {...collectionToAdd[key]})
+    })
+    await batch.commit();
+  }
+}
+
+export const getShopCollectionRef = () => {
+  return firestore.collection('collection').orderBy("title")
+}
 
 firebase.initializeApp(config);
 

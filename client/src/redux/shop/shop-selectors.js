@@ -14,5 +14,5 @@ export const selectCollectionsForPreview = createSelector(
 
 export const selectExactCollection = (id) => createSelector(
   [selectCollections],
-  collections => collections[id]
+  collection => collection[id]
 );

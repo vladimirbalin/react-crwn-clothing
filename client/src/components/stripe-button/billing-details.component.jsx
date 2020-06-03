@@ -1,9 +1,40 @@
 import React from "react";
-import FormInput from "../form-input/form-input.component";
-import './stripe-checkout.styles.scss';
+import FormInput, { Group, Input } from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { CardElement } from "@stripe/react-stripe-js";
+import styled from "styled-components";
 
+const FormInputContainer = styled(FormInput)`
+  ${Group} {margin: 0};
+  ${Input} {font-size: 16px}
+`;
+
+const CardElementContainer = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #a6abb0;
+  margin: 10px;
+  & .StripeElement {
+    width: 100%;
+    padding: 15px;
+  }
+`;
+const SubmitButton = styled(CustomButton)`
+  display: block;
+  margin: 0 auto;
+
+  &:disabled {
+    opacity: .1;
+
+    &:hover {
+      background-color: black;
+      color: white;
+      cursor: auto;
+      border: none;
+    }
+  }
+`;
 function BillingDetails(props) {
   const {
     name, email, address, city, zip,
@@ -12,7 +43,7 @@ function BillingDetails(props) {
   } = props;
   return (
     <>
-      <FormInput
+      <FormInputContainer
         name="name"
         label="Name"
         type="text"
@@ -21,7 +52,7 @@ function BillingDetails(props) {
         placeholder="Jane Doe"
         required
       />
-      <FormInput
+      <FormInputContainer
         name="email"
         label="Email"
         type="email"
@@ -30,7 +61,7 @@ function BillingDetails(props) {
         placeholder="jane.doe@example.com"
         required
       />
-      <FormInput
+      <FormInputContainer
         name="address"
         label="Address"
         type="text"
@@ -39,7 +70,7 @@ function BillingDetails(props) {
         placeholder="185 Berry St. Suite 550"
         required
       />
-      <FormInput
+      <FormInputContainer
         name="city"
         label="City"
         type="text"
@@ -48,7 +79,7 @@ function BillingDetails(props) {
         placeholder="San Francisco"
         required
       />
-      <FormInput
+      <FormInputContainer
         name="zip"
         label="ZIP"
         type="text"
@@ -57,11 +88,11 @@ function BillingDetails(props) {
         placeholder="94103"
         required
       />
-      <div className='card-element-container'>
+      <CardElementContainer>
         <CardElement options={{hidePostalCode: true}}
                      onChange={handleCardDetailsChange}/>
-      </div>
-      <CustomButton type='submit' disabled={isProcessing || !stripe}>Pay ${totalPrice}</CustomButton>
+      </CardElementContainer>
+      <SubmitButton type='submit' disabled={isProcessing || !stripe}>Pay ${totalPrice}</SubmitButton>
     </>
   );
 }

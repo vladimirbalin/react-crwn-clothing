@@ -2,15 +2,43 @@ import React from "react";
 import CollectionOverview from "../../components/collection-overview/collection-overview.component";
 import { Route } from "react-router-dom";
 import CollectionPage from "../collection/collection.component";
+import { getShopCollectionRef } from "../../firebase/firebase.utils";
+import { connect } from "react-redux";
+import { setShopData } from "../../redux/shop/shop-reducer";
 
-const ShopPage = ({ match }) => {
-    return (
-      <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionOverview} />
-        <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-      </div>
-    );
+class ShopPage extends React.Component {
+  unsubscribeFromSnapshot = null;
+
+  componentDidMount() {
+    this.unsubscribeFromSnapshot =
+      getShopCollectionRef()
+        .onSnapshot(querySnapshot => {
+          const collectionResult = querySnapshot.docs.map(doc => {
+            const {title, items} = doc.data();
+            return {
+              id: doc.id,
+              title,
+              items,
+            }
+          });
+          this.props.setShopData(collectionResult);
+        })
   };
 
+  componentWillUnmount() {
+    this.unsubscribeFromSnapshot()
+  }
 
-export default ShopPage;
+  render() {
+    const {match} = this.props;
+
+    return (
+      <div className="shop-page">
+        <Route exact path={`${match.path}`} component={CollectionOverview}/>
+        <Route path={`${match.path}/:collectionId`} component={CollectionPage}/>
+      </div>
+    );
+  }
+}
+
+export default connect(null, {setShopData})(ShopPage);

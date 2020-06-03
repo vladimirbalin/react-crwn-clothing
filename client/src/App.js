@@ -1,10 +1,9 @@
 import React from "react";
 import "./App.css";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Switch, Route, Redirect } from "react-router-dom";
-import styled from 'styled-components';
 //comps
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
@@ -26,7 +25,7 @@ class App extends React.Component {
       if (user) {
         const userRef = await createUserProfileDocument(user);
 
-        userRef.onSnapshot((snapShot) => {
+        userRef.onSnapshot(snapShot => {
           this.props.setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),

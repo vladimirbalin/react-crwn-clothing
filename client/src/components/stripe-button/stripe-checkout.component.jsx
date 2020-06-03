@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
-import './stripe-checkout.styles.scss';
 import BillingDetails from "./billing-details.component";
 import axios from "axios";
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectTotalCartItemsPrice} from "../../redux/cart/cart-selectors";
 import {withRouter} from "react-router-dom";
+import styled from "styled-components";
+
+const StripeForm = styled.div`
+  width: 20vw;
+  margin: 10px auto;
+  text-align: center;
+  .group {
+    margin: 0;
+
+    .form-input {
+      font-size: 16px;
+    }
+  }
+`;
 
 const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
 
@@ -110,7 +123,7 @@ const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
   };
 
   return (
-    <form className='stripe-form' onSubmit={handleFormSubmit}>
+    <StripeForm onSubmit={handleFormSubmit}>
       <BillingDetails isProcessing={isProcessing}
                       stripe={stripe}
                       totalPrice={totalPrice}
@@ -122,7 +135,7 @@ const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
                       handleChange={handleChange}
                       handleCardDetailsChange={handleCardDetailsChange}/>
       {checkoutError && (<span>{checkoutError}</span>)}
-    </form>);
+    </StripeForm>);
 
 };
 
