@@ -1,6 +1,7 @@
 import React from "react";
 import CollectionItem from '../collection-item/collection-item.component';
 import styled from "styled-components";
+import {withRouter} from "react-router-dom";
 
 const CollectionPreviewContainer = styled.div`
   display: flex;
@@ -10,17 +11,18 @@ const CollectionPreviewContainer = styled.div`
 const Title = styled.h1`
   font-size: 28px;
   margin-bottom: 25px;
+  cursor: pointer;
 `;
 const Preview = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const CollectionPreview = ({ title, items }) => {
-  
+const CollectionPreview = ({ title, items, history, match }) => {
+  const clickHandler = () => history.push(`${match.url}/${title.toLowerCase()}`);
   return (
     <CollectionPreviewContainer>
-      <Title>{title.toUpperCase()}</Title>
+      <Title onClick={clickHandler}>{title.toUpperCase()}</Title>
       <Preview>
         {items
           .filter((el, idx) => idx < 4)
@@ -32,4 +34,4 @@ const CollectionPreview = ({ title, items }) => {
   );
 };
 
-export default CollectionPreview;
+export default withRouter(CollectionPreview);

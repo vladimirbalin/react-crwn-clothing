@@ -3,6 +3,8 @@ import { selectExactCollection } from "../../redux/shop/shop-selectors";
 import { connect } from "react-redux";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import styled from "styled-components";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
 
 const CollectionPageContainer = styled.div`
   display: flex;
@@ -21,7 +23,7 @@ const CollectionItemContainer = styled(CollectionItem)`
   margin-right: 10px;
 `;
 
-const CollectionPage = ({ collection }) => {
+const CollectionPage = ({ collection, ...otherProps }) => {
   const { title, items } = collection;
   return (
     <CollectionPageContainer>
@@ -31,14 +33,14 @@ const CollectionPage = ({ collection }) => {
           items.map(item => <CollectionItemContainer key={item.id} item={item}/>)
         }
       </Items>
-
     </CollectionPageContainer>
   )
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectExactCollection(ownProps.match.params.collectionId)(state)
+const mapStateToProps = createStructuredSelector({
+  collection: (state, ownProps) => selectExactCollection(ownProps.match.params.collectionId)(state)
 });
 
-
-export default connect(mapStateToProps)(CollectionPage);
+export default compose(
+  connect(mapStateToProps)
+)(CollectionPage);

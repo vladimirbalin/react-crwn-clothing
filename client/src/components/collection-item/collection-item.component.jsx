@@ -49,7 +49,7 @@ const Button = styled(CustomButton)`
     }
 `;
 
-const CollectionItem = ({ item, addItem, className }) => {
+const CollectionItem = ({ item, addItem, className, history }) => {
   const { imageUrl, name, price } = item;
   const handleClick = () => addItem(item);
 

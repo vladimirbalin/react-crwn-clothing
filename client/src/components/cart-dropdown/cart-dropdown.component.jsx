@@ -58,10 +58,9 @@ const CartDropDown = ({ cartItems, history, toggleDropdown }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector(
-  {
+const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
-  });
+});
 export default compose(
   withRouter,
   connect(mapStateToProps, {toggleDropdown}),
