@@ -55,6 +55,17 @@ export const createCollection = async (collectionName, collectionToAdd) => {
 export const getShopCollectionRef = () => {
   return firestore.collection('collection').orderBy("title")
 }
+export const convertCollectionsSnapshotToMap = snapshot => {
+  const collections = snapshot.docs.map(doc => {
+    const { title, items } = doc.data();
+    return {
+      id: doc.id,
+      title,
+      items,
+    }
+  });
+  return collections;
+}
 
 firebase.initializeApp(config);
 

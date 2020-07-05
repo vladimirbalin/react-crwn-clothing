@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import CollectionPageContainer from "../collection/collection.container";
 
 class ShopPage extends React.Component {
-  render() {
+  render() {    
     const { match } = this.props;
     return (
       <div className="shop-page">

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Switch, Route, Redirect } from "react-router-dom";
