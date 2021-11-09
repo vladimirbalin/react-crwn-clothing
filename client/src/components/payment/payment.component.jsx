@@ -1,5 +1,5 @@
 import React from 'react';
-import StripeCheckout from "../stripe-button/stripe-checkout.component";
+import StripeCheckout from "../stripe/stripe-form.component";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
@@ -58,7 +58,7 @@ const Payment = ({ history }) => {
 
           <TestFakeCard>
             <Title className='title'>Use following fake card for testing payments: </Title>
-            4242 4242 4242 4242 - exp.: 01/21 - CVV: 123
+            4242 4242 4242 4242 - exp.: any future date - CVV: any three numbers
           </TestFakeCard>
           <PopupClose onClick={() => history.push(`/checkout`)}>
             <strong>✕</strong>

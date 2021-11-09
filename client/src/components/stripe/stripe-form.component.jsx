@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
-import BillingDetails from "./billing-details.component";
+import BillingDetails from "./form-internals.component";
 import axios from "axios";
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
@@ -8,7 +8,7 @@ import {selectTotalCartItemsPrice} from "../../redux/cart/cart-selectors";
 import {withRouter} from "react-router-dom";
 import styled from "styled-components";
 
-const StripeForm = styled.div`
+const StripeForm = styled.form`
   width: 20vw;
   margin: 10px auto;
   text-align: center;
@@ -119,6 +119,7 @@ const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
 
     } catch (err) {
       setCheckoutError(err.message);
+      setProcessingTo(false);
     }
   };
 
