@@ -79,7 +79,8 @@ const StripeCheckout = ({ totalPrice, onSuccessfulCheckout, match }) => {
 
     try {
       const {data: clientSecret} = await axios({
-        url: '/payment',
+        url: 'http://crwn.balin.ru.com:5000/payment',
+        port: 5000,
         method: 'post',
         data: {
           amount: totalPrice * 100,

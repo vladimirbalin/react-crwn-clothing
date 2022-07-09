@@ -1,4 +1,4 @@
-technologies used
+## technologies used
 
 - react <br/>
 - react-router <br/>
@@ -8,3 +8,21 @@ technologies used
     - redux-sagas<br/>
 - reselect <br/>
 - firebase<br/>
+
+### .env in root folder:
+```env
+STRIPE_SECRET_KEY=
+STRIPE_PUBLISHABLE_KEY=
+```
+
+## Usage
+```bash
+yarn/npm install
+cd ./client
+yarn/npm install
+```
+```bash
+yarn start
+cd ./client
+yarn start
+```
