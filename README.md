@@ -1,4 +1,6 @@
-## technologies used
+## Приложение для интернет магазина одежды
+
+#### Использовались:
 
 - react <br/>
 - react-router <br/>
@@ -9,18 +11,21 @@
 - reselect <br/>
 - firebase<br/>
 
-### .env in root folder:
+#### Установка, настройка:
+
+- .env in root folder:
+
 ```env
 STRIPE_SECRET_KEY=
 STRIPE_PUBLISHABLE_KEY=
 ```
 
-## Usage
 ```bash
 yarn/npm install
 cd ./client
 yarn/npm install
 ```
+
 ```bash
 yarn start
 cd ./client
